@@ -24,7 +24,7 @@ Explainability methods for Vision-Language Models (VLMs) like CLIP often suffer 
 
 The pipeline of our method is structured as follows:
 
-![Overall Pipeline](figures/overall_pipeline.pdf)
+![Overall Pipeline](figures/overall_pipeline.png)
 
 1. **Dictionary Construction**: Gather visual concepts and prompt embeddings.
 2. **Orthogonal Semantic Projection (OSP)**: Project the target text embedding orthogonally to the dictionary space, stripping out overlapping semantic components.
@@ -37,12 +37,12 @@ The pipeline of our method is structured as follows:
 ### 1. Qualitative Benchmark
 We evaluate OSP against multiple state-of-the-art explainability methods (including LeGrad, GradCAM, CheferCAM, AttentionCAM, and DAAM) on a variety of benchmarks. Below is a qualitative comparison grid on the "bird" visual concept:
 
-![Qualitative Comparison](figures/combined_grid_all_methods_bird.pdf)
+![Qualitative Comparison](figures/combined_grid_all_methods_bird.png)
 
 ### 2. Hallucination Suppression
 The figure below demonstrates how standard explainability maps activate on competing or co-occurring concepts, and how the OSP projection step successfully suppresses these semantic hallucinations to isolate the target concept:
 
-![Hallucination Mitigation](figures/hallucination_figure.pdf)
+![Hallucination Mitigation](figures/hallucination_figure.png)
 
 ---
 
