@@ -4,27 +4,14 @@ Official repository for the paper **"Disentangling Hallucinations: Orthogonal Se
 
 ---
 
-## Authors & Affiliations
-
-* **Emirhan Bilgiç**<sup>1,2</sup> &nbsp;•&nbsp; **Baptiste Caramiaux**<sup>2</sup> &nbsp;•&nbsp; **Zhi Yan**<sup>1</sup> &nbsp;•&nbsp; **Gianni Franchi**<sup>3</sup>
-
-<sup>1</sup> **U2IS, ENSTA, Institut Polytechnique de Paris**, Palaiseau, France  
-<sup>2</sup> **ISIR, Université Sorbonne**, Pierre et Marie Curie, Paris, France  
-<sup>3</sup> **AMIAD, Pôle Recherche**, Palaiseau, France  
-
----
-
-## Method Overview
-
+### Method Overview 
 Explainability methods for Vision-Language Models (VLMs) like CLIP often suffer from **semantic hallucinations**—activating on concepts that are co-occurring, similar, or contextually related but not actually present in the image (false positives).
+
+![Overall Pipeline](figures/overall_pipeline.png)
 
 **Orthogonal Semantic Projection (OSP)** addresses this by leveraging Orthogonal Matching Pursuit (OMP) to identify and project out shared semantic components from text embeddings before computing explainability maps. This process disentangles hallucinated features from genuine visual activations, resulting in highly focused, semantically accurate explainability maps.
 
-### Core Pipeline
-
-The pipeline of our method is structured as follows:
-
-![Overall Pipeline](figures/overall_pipeline.png)
+Overall Pipeline is as follows:
 
 1. **Dictionary Construction**: Gather visual concepts and prompt embeddings.
 2. **Orthogonal Semantic Projection (OSP)**: Project the target text embedding orthogonally to the dictionary space, stripping out overlapping semantic components.
