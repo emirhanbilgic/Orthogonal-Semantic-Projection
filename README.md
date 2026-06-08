@@ -40,7 +40,7 @@ We evaluate OSP against multiple state-of-the-art explainability methods (includ
 ![Qualitative Comparison](figures/combined_grid_all_methods_bird.png)
 
 ### 2. Hallucination Suppression
-The figure below demonstrates how standard explainability maps activate on competing or co-occurring concepts, and how the OSP projection step successfully suppresses these semantic hallucinations to isolate the target concept:
+The figure below demonstrates how standard explainability maps activate on competing or co-occurring concepts:
 
 ![Hallucination Mitigation](figures/hallucination_figure.png)
 
