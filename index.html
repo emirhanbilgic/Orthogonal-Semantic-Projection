@@ -62,12 +62,13 @@
   .btn svg{width:18px; height:18px; fill:currentColor}
 
   /* Video */
-  .video-section{margin:34px 0 10px}
+  .video-section{margin:34px 0 10px; text-align:center}
   .video-frame{
     background:var(--card); border:1px solid var(--line); border-radius:16px;
     padding:10px; box-shadow:0 18px 50px -28px rgba(0,0,0,.45);
+    max-width:900px; margin:0 auto;
   }
-  video{width:100%; display:block; border-radius:9px; background:#000}
+  video{width:100%; display:block; border-radius:9px; background:#000; margin-inline:auto}
   .caption{text-align:center; color:var(--muted); font-size:14px; margin:12px 4px 0}
 
   /* Sections */
@@ -119,20 +120,21 @@
 
 <header>
   <div class="wrap">
-    <div class="kicker">ECCV-style Project Page</div>
+    <div class="kicker">European Conference on Computer Vision (ECCV) 2026</div>
     <h1>Disentangling Hallucinations</h1>
     <p class="subtitle">Orthogonal Semantic Projection for Robust Interpretability</p>
 
     <div class="authors">
-      Emirhan Bilgi&ccedil;<sup>1,2</sup>&nbsp;&nbsp;
+      Emirhan Bilgi&ccedil;<sup>1,2,3</sup>&nbsp;&nbsp;
       Baptiste Caramiaux<sup>2</sup>&nbsp;&nbsp;
       Zhi Yan<sup>1</sup>&nbsp;&nbsp;
-      Gianni Franchi<sup>3</sup>
+      Gianni Franchi<sup>4</sup>
     </div>
     <p class="affil">
-      <sup>1</sup>U2IS, ENSTA, Institut Polytechnique de Paris, Palaiseau &nbsp;·&nbsp;
-      <sup>2</sup>ISIR, Sorbonne Universit&eacute;, Paris &nbsp;·&nbsp;
-      <sup>3</sup>AMIAD, P&ocirc;le Recherche, Palaiseau
+      <sup>1</sup>U2IS, ENSTA, Institut Polytechnique de Paris, Palaiseau, France &nbsp;·&nbsp;
+      <sup>2</sup>ISIR, Sorbonne Universit&eacute;, Paris, France &nbsp;·&nbsp;
+      <sup>3</sup>Imperial College London, United Kingdom &nbsp;·&nbsp;
+      <sup>4</sup>AMIAD, P&ocirc;le Recherche, Palaiseau, France
     </p>
 
     <div class="btns">
@@ -213,6 +215,13 @@
       <img src="static/pipeline.png" alt="Attribution methods unified formulation" />
       <figcaption>Most saliency methods reduce to one structure: a function of the image features and the
       text query, <em>V<sub>c</sub>(x) = f(a<sup>img</sup>, a<sup>txt</sup><sub>c</sub>)</em>. OSP purifies the text query before this function is applied.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="static/overall_pipeline.png" alt="Overall pipeline of OSP" />
+      <figcaption>Overall pipeline of OSP. Our method performs a geometric intervention in the
+      multimodal embedding space to disentangle shared semantic components that cause hallucination,
+      resulting in more faithful and grounded explanations.</figcaption>
     </figure>
 
     <figure>
