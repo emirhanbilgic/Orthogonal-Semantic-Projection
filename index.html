@@ -411,23 +411,30 @@
 
   <hr class="divider" />
 
-  <!-- BibTeX -->
-  <section id="bibtex">
+  <!-- Figures / Method -->
+  <section id="figures">
     <div class="wrap">
-      <h2>BibTeX</h2>
-      <div class="copy-row">
-        <span style="color:var(--muted);font-size:14px">Cite this work</span>
-        <button class="copy-btn" onclick="copyBib()">Copy</button>
-      </div>
-      <pre id="bib">@article{bilgic2026osp,
-  title   = {Disentangling Hallucinations: Orthogonal Semantic Projection
-             for Robust Interpretability},
-  author  = {Bilgi\c{c}, Emirhan and Caramiaux, Baptiste and
-             Yan, Zhi and Franchi, Gianni},
-  journal = {arXiv preprint arXiv:2606.14758},
-  year    = {2026},
-  url     = {https://arxiv.org/abs/2606.14758}
-}</pre>
+      <h2>Method</h2>
+
+      <figure>
+        <img src="static/pipeline.png" alt="Attribution methods unified formulation" />
+        <figcaption>Most saliency methods reduce to one structure: a function of the image features and the
+          text query, <em>V<sub>c</sub>(x) = f(a<sup>img</sup>, a<sup>txt</sup><sub>c</sub>)</em>. OSP purifies the text
+          query before this function is applied.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="static/overall_pipeline.png" alt="Overall pipeline of OSP" />
+        <figcaption>Overall pipeline of OSP. Our method performs a geometric intervention in the
+          multimodal embedding space to disentangle shared semantic components that cause hallucination,
+          resulting in more faithful and grounded explanations.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="static/attribution_methods.png" alt="Vanilla XAI vs OSP-grounded XAI" style="max-width:520px" />
+        <figcaption>Standard XAI hallucinates absent concepts (top). OSP-grounded explanations stay faithful to the
+          prompt: &ldquo;correct for the right reasons&rdquo; (bottom).</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -455,26 +462,28 @@
           <p>Consistent AUROC gains on ImageNet-Segmentation, backed by a 200-participant user study.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <figure>
-        <img src="static/pipeline.png" alt="Attribution methods unified formulation" />
-        <figcaption>Most saliency methods reduce to one structure: a function of the image features and the
-          text query, <em>V<sub>c</sub>(x) = f(a<sup>img</sup>, a<sup>txt</sup><sub>c</sub>)</em>. OSP purifies the text
-          query before this function is applied.</figcaption>
-      </figure>
+  <hr class="divider" />
 
-      <figure>
-        <img src="static/overall_pipeline.png" alt="Overall pipeline of OSP" />
-        <figcaption>Overall pipeline of OSP. Our method performs a geometric intervention in the
-          multimodal embedding space to disentangle shared semantic components that cause hallucination,
-          resulting in more faithful and grounded explanations.</figcaption>
-      </figure>
-
-      <figure>
-        <img src="static/attribution_methods.png" alt="Vanilla XAI vs OSP-grounded XAI" style="max-width:520px" />
-        <figcaption>Standard XAI hallucinates absent concepts (top). OSP-grounded explanations stay faithful to the
-          prompt: &ldquo;correct for the right reasons&rdquo; (bottom).</figcaption>
-      </figure>
+  <!-- BibTeX -->
+  <section id="bibtex">
+    <div class="wrap">
+      <h2>BibTeX</h2>
+      <div class="copy-row">
+        <span style="color:var(--muted);font-size:14px">Cite this work</span>
+        <button class="copy-btn" onclick="copyBib()">Copy</button>
+      </div>
+      <pre id="bib">@article{bilgic2026osp,
+  title   = {Disentangling Hallucinations: Orthogonal Semantic Projection
+             for Robust Interpretability},
+  author  = {Bilgi\c{c}, Emirhan and Caramiaux, Baptiste and
+             Yan, Zhi and Franchi, Gianni},
+  journal = {arXiv preprint arXiv:2606.14758},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2606.14758}
+}</pre>
     </div>
   </section>
 
