@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orthogonal Semantic Projection (OSP)</title>
+<meta name="description" content="Disentangling Hallucinations: Orthogonal Semantic Projection for Robust Interpretability." />
+<meta property="og:title" content="Orthogonal Semantic Projection (OSP)" />
+<meta property="og:description" content="A geometric intervention that disentangles shared semantics to remove hallucinations in XAI attribution maps." />
+<meta property="og:image" content="static/poster.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#1a1a1a; --muted:#5b5b5b; --line:#e7e7e2;
+    --blue:#2e6ca6; --blue-d:#23567f; --bg:#fafaf7; --card:#ffffff;
+    --max:980px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+  /* Header / hero */
+  header{padding:54px 0 8px; text-align:center}
+  .kicker{
+    font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--blue); font-weight:700; margin-bottom:14px;
+  }
+  h1{
+    font-family:"Newsreader",Georgia,serif; font-weight:700;
+    font-size:clamp(30px,5vw,52px); line-height:1.12; margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  .subtitle{
+    font-size:clamp(16px,2.4vw,21px); color:var(--muted); font-weight:500;
+    margin:0 auto 22px; max-width:760px;
+  }
+  .authors{font-size:17px; margin:18px 0 4px; font-weight:500}
+  .authors a{color:var(--ink); border-bottom:1px solid transparent}
+  .authors a:hover{border-bottom-color:var(--blue); text-decoration:none}
+  .affil{font-size:13.5px; color:var(--muted); max-width:720px; margin:6px auto 0}
+  sup{color:var(--blue); font-weight:600}
+
+  /* Buttons */
+  .btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:26px 0 8px}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--ink); color:#fff; padding:11px 20px; border-radius:999px;
+    font-weight:600; font-size:15px; transition:transform .12s ease, background .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px); text-decoration:none; background:#000}
+  .btn.alt{background:var(--blue)}
+  .btn.alt:hover{background:var(--blue-d)}
+  .btn svg{width:18px; height:18px; fill:currentColor}
+
+  /* Video */
+  .video-section{margin:34px 0 10px}
+  .video-frame{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:10px; box-shadow:0 18px 50px -28px rgba(0,0,0,.45);
+  }
+  video{width:100%; display:block; border-radius:9px; background:#000}
+  .caption{text-align:center; color:var(--muted); font-size:14px; margin:12px 4px 0}
+
+  /* Sections */
+  section{padding:40px 0}
+  .divider{border:0; border-top:1px solid var(--line); margin:0}
+  h2{
+    font-family:"Newsreader",Georgia,serif; font-weight:700;
+    font-size:clamp(24px,3.4vw,32px); margin:0 0 16px; text-align:center;
+  }
+  .abstract{
+    font-size:17.5px; color:#2a2a2a; max-width:800px; margin:0 auto; text-align:justify;
+  }
+  .abstract b{color:var(--ink)}
+
+  /* Highlights grid */
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:8px}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px;
+  }
+  .card h3{margin:0 0 6px; font-size:17px; display:flex; align-items:center; gap:8px}
+  .card p{margin:0; color:var(--muted); font-size:14.5px}
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block}
+
+  /* Figures */
+  figure{margin:22px 0 0; text-align:center}
+  figure img{
+    max-width:100%; border:1px solid var(--line); border-radius:12px; background:#fff;
+  }
+  figcaption{color:var(--muted); font-size:14px; margin-top:10px; max-width:820px; margin-left:auto; margin-right:auto}
+
+  /* BibTeX */
+  pre{
+    background:#1e1e22; color:#e8e8ea; border-radius:12px; padding:18px 20px;
+    overflow-x:auto; font-size:13.5px; line-height:1.55;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  .copy-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px}
+  .copy-btn{
+    background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 12px;
+    font-size:13px; cursor:pointer; font-weight:600; color:var(--ink);
+  }
+  .copy-btn:hover{border-color:var(--blue); color:var(--blue)}
+
+  footer{padding:34px 0 60px; text-align:center; color:var(--muted); font-size:13.5px}
+  footer .divider{margin-bottom:26px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">ECCV-style Project Page</div>
+    <h1>Disentangling Hallucinations</h1>
+    <p class="subtitle">Orthogonal Semantic Projection for Robust Interpretability</p>
+
+    <div class="authors">
+      Emirhan Bilgi&ccedil;<sup>1,2</sup>&nbsp;&nbsp;
+      Baptiste Caramiaux<sup>2</sup>&nbsp;&nbsp;
+      Zhi Yan<sup>1</sup>&nbsp;&nbsp;
+      Gianni Franchi<sup>3</sup>
+    </div>
+    <p class="affil">
+      <sup>1</sup>U2IS, ENSTA, Institut Polytechnique de Paris, Palaiseau &nbsp;·&nbsp;
+      <sup>2</sup>ISIR, Sorbonne Universit&eacute;, Paris &nbsp;·&nbsp;
+      <sup>3</sup>AMIAD, P&ocirc;le Recherche, Palaiseau
+    </p>
+
+    <div class="btns">
+      <a class="btn" href="https://arxiv.org/abs/2606.14758" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15a0 0 0 0 1 0 0H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5v1.5H8V10z"/></svg>
+        Paper (arXiv)
+      </a>
+      <a class="btn alt" href="https://github.com/emirhanbilgic/Orthogonal-Semantic-Projection" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-1.7c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+        Code
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero animation -->
+<div class="wrap video-section">
+  <div class="video-frame">
+    <video controls autoplay muted loop playsinline poster="static/poster.jpg">
+      <source src="static/OSP_animation.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <p class="caption">Overview of OSP: a geometric intervention in the multimodal embedding space that removes hallucinations from attribution maps.</p>
+</div>
+
+<hr class="divider" />
+
+<!-- Abstract -->
+<section id="abstract">
+  <div class="wrap">
+    <h2>Abstract</h2>
+    <p class="abstract">
+      As Vision-Language Models are increasingly deployed in safety-critical applications, the
+      trustworthiness of their explanations becomes crucial. Explainable AI (XAI) methods for
+      Vision-Language Models often suffer from <b>semantic hallucination</b>, where attribution maps
+      highlight prominent image regions even when prompted with incorrect text descriptions
+      (e.g., highlighting a dog when prompted &ldquo;cat&rdquo;). Although this problem is widespread, a formal
+      mathematical analysis of XAI methods and CLIP embeddings is largely missing in the literature.
+      We demonstrate that this phenomenon is not specific to a single architecture but is a fundamental
+      consequence of <b>Linear Semantic Leakage</b> in high-dimensional embedding spaces. We propose a
+      unified theoretical framework, <b>Linear Semantic Attribution (LSA)</b>, which generalizes across
+      discriminative methods. We introduce <b>OSP</b>, a geometric intervention that utilizes the residual
+      property of Orthogonal Matching Pursuit (OMP) to disentangle unique semantic signals from shared
+      concepts. We prove theoretically and demonstrate empirically that OSP minimizes hallucination by
+      orthogonalizing the query vector against distractor concepts, rendering the attribution model blind
+      to shared features while preserving fidelity for correct prompts.
+    </p>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Highlights -->
+<section id="highlights">
+  <div class="wrap">
+    <h2>Highlights</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><span class="dot" style="background:#2e6ca6"></span>Plug-and-play</h3>
+        <p>A training-free module applied directly in the embedding space, before attribution.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:#4e9e7e"></span>Universal</h3>
+        <p>Works across CLIP, SigLIP and Stable Diffusion, and 5 attribution methods.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:#c0392b"></span>Removes ghost signals</h3>
+        <p>Orthogonality against distractors eliminates hallucinated saliency by construction.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:#c9a227"></span>Validated</h3>
+        <p>Consistent AUROC gains on ImageNet-Segmentation, backed by a 200-participant user study.</p>
+      </div>
+    </div>
+
+    <figure>
+      <img src="static/pipeline.png" alt="Attribution methods unified formulation" />
+      <figcaption>Most saliency methods reduce to one structure: a function of the image features and the
+      text query, <em>V<sub>c</sub>(x) = f(a<sup>img</sup>, a<sup>txt</sup><sub>c</sub>)</em>. OSP purifies the text query before this function is applied.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="static/attribution_methods.png" alt="Vanilla XAI vs OSP-grounded XAI" style="max-width:520px" />
+      <figcaption>Standard XAI hallucinates absent concepts (top). OSP-grounded explanations stay faithful to the prompt: &ldquo;correct for the right reasons&rdquo; (bottom).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- BibTeX -->
+<section id="bibtex">
+  <div class="wrap">
+    <h2>BibTeX</h2>
+    <div class="copy-row">
+      <span style="color:var(--muted);font-size:14px">Cite this work</span>
+      <button class="copy-btn" onclick="copyBib()">Copy</button>
+    </div>
+<pre id="bib">@article{bilgic2026osp,
+  title   = {Disentangling Hallucinations: Orthogonal Semantic Projection
+             for Robust Interpretability},
+  author  = {Bilgi\c{c}, Emirhan and Caramiaux, Baptiste and
+             Yan, Zhi and Franchi, Gianni},
+  journal = {arXiv preprint arXiv:2606.14758},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2606.14758}
+}</pre>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <hr class="divider" />
+    <p>
+      <a href="https://arxiv.org/abs/2606.14758" target="_blank" rel="noopener">Paper</a> &nbsp;·&nbsp;
+      <a href="https://github.com/emirhanbilgic/Orthogonal-Semantic-Projection" target="_blank" rel="noopener">Code</a>
+    </p>
+    <p>&copy; 2026 The Authors. Page template is free to reuse.</p>
+  </div>
+</footer>
+
+<script>
+  function copyBib(){
+    const t = document.getElementById('bib').innerText;
+    navigator.clipboard.writeText(t).then(()=>{
+      const b = document.querySelector('.copy-btn');
+      const o = b.innerText; b.innerText = 'Copied!';
+      setTimeout(()=>b.innerText=o, 1400);
+    });
+  }
+</script>
+</body>
+</html>
